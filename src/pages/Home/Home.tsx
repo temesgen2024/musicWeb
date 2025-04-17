@@ -3,14 +3,28 @@ import img from '@/assets/banner/banner4.jpg'
 import { Input } from '@/components/ui/input'
 import Layout from '@/hooks/Layout'
 import { Button } from '@/components/ui/button'
+import { Music } from 'lucide-react'
+import MusicCard from '@/components/CustomUi/MusicCard'
+import ArtistCard from '@/components/CustomUi/ArtistCard'
+import artist1 from '@/assets/artist/artist1.jpg'
+import artist2 from '@/assets/artist/artist2.jpg'
+import artist3 from '@/assets/artist/artist3.jpg'
+import artist4 from '@/assets/artist/artist4.jpg'
+import artist5 from '@/assets/artist/artist5.jpg'
 type Props = {}
-
+const artistData = [
+  { image: artist1, name: 'Artist 1' },
+  { image: artist2, name: 'Artist 2' },
+  { image: artist3, name: 'Artist 3' },
+  { image: artist4, name: 'Artist 4' },
+  { image: artist5, name: 'Artist 5' }
+]
 const Home = (props: Props) => {
   return (
     <Layout>
       {/* Top Navigation Bar */}
       <div
-        className='min-h-[60vh] w-full px-4 py-4 rounded-2xl relative'
+        className='min-h-[60vh] w-full px-4 py-4 rounded-2xl relative gap-20 flex flex-col'
         style={{
           backgroundImage: `url("${img}")`,
           backgroundSize: 'cover',
@@ -33,21 +47,31 @@ const Home = (props: Props) => {
           <Button variant={"ghost"} className='px-10 border border-fuchsia-500 rounded-none text-fuchsia-500 hover:bg-fuchsia-500 hover:text-white'>Login</Button>
           <Button className='px-10 rounded-none'>Sign Up</Button>
         </div>
-        <div className='w-1/2 z-10 text-white relative'>
+        <div className='w-1/2 z-10 text-white relative gap-5 flex flex-col'>
           <div>
             <h1 className='text-white text-5xl'>All the <span className='text-fuchsia-500'>Best song</span> in one place</h1>
           </div>
           <div>
             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolore cumque sit dolorum itaque id pariatur porro dignissimos ab molestias! Harum tempore asperiores, porro esse ipsam inventore culpa beatae ullam nam!</p>
           </div>
-          <div>
+          <div className='flex gap-4'>
           <Button variant={"ghost"} className='px-10 border border-fuchsia-500 rounded-none text-fuchsia-500 hover:bg-fuchsia-500 hover:text-white'>Discover now</Button>
           <Button className='px-10 rounded-none'>Play list</Button>
           </div>
         </div>
 
       </div>
+      <MusicCard />
+        <div className='gap-4 flex flex-col'>
+<h1 className='text-white text-3xl font-semibold'>popular <span className='text-fuchsia-700'>Artist</span></h1>
+        <div className='flex gap-3'>
+        {artistData.map((artist, index) => (
+          <ArtistCard key={index} image={artist.image} name={artist.name} />
+        ))}
+      </div>
+        </div>
     </Layout>
+
   )
 }
 
