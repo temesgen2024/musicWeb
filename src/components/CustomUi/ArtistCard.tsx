@@ -12,6 +12,7 @@ const ArtistCard = ({ image, name }: Props) => {
         <p> 
             <span className='text-white text-lg font-semibold'>{name}</span>
         </p>
+        
     </div>
   )
 }

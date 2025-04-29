@@ -26,7 +26,7 @@ const Home = (props: Props) => {
     <Layout>
       {/* Top Navigation Bar */}
       <div
-        className='min-h-[60vh] w-full px-4 py-4 rounded-2xl relative gap-20 flex flex-col'
+        className='min-h-[60vh] w-full px-4 py-4 rounded-2xl relative gap-20 flex flex-col mb-6'
         style={{
           backgroundImage: `url("${img}")`,
           backgroundSize: 'cover',
@@ -63,25 +63,42 @@ const Home = (props: Props) => {
           </div>
         </div>
       </div>
-
-      <MusicCard imgSrc={artist1} songName="Sample Song" artistName="Sample Artist" />
-      <div className='gap-4 flex flex-col'>
-        <h1 className='text-white text-3xl font-semibold'>popular <span className='text-fuchsia-700'>Artist</span></h1>
-        <div className='flex gap-3'>
-          {artistData.map((artist, index) => (
-            <ArtistCard key={index} image={artist.image} name={artist.name} />
-          ))}
+      <div className='gap-4 flex flex-col mb-5'>
+        <h1 className='text-white text-3xl font-semibold'>weekliy Top <span className='text-fuchsia-700'>Songs</span></h1>
+        <div className='flex justify-between items-center gap-4'>
+          <div className='flex gap-3'>
+            {artistData.map((artist, index) => (
+              <MusicCard key={index} imgSrc={artist.image} songName={artist.name} artistName={artist.name} />
+            ))}
+          </div>
+          <ViewAllBtn href="/songs" />
         </div>
       </div>
-        // Example of providing required props
-      <div className='gap-4 flex flex-col'>
-        <h1 className='text-white text-3xl font-semibold'>weekliy Top <span className='text-fuchsia-700'>Songs</span></h1>
+      <div className='gap-4 flex flex-col mb-5'>
+        <h1 className='text-white text-3xl font-semibold'>New Realse <span className='text-fuchsia-700'>Songs</span></h1>
+        <div className='flex justify-between items-center gap-4'>
+
         <div className='flex gap-3'>
           {artistData.map((artist, index) => (
             <MusicCard key={index} imgSrc={artist.image} songName={artist.name} artistName={artist.name} />
           ))}
         </div>
+        <ViewAllBtn href="/songs" />
+        </div>
       </div>
+      <div className='gap-4 flex flex-col'>
+        <h1 className='text-white text-3xl font-semibold'>popular <span className='text-fuchsia-700'>Artist</span></h1>
+        <div className='flex justify-between items-center gap-4'>
+
+        <div className='flex gap-3'>
+          {artistData.map((artist, index) => (
+            <ArtistCard key={index} image={artist.image} name={artist.name} />
+          ))}
+        </div>
+        <ViewAllBtn href="/artist" />
+        </div>
+      </div>
+
       <div>
         <h1 className='text-white text-3xl font-semibold mt-10 mb-5'>Top <span
           className='text-fuchsia-700'>Videos</span></h1>
@@ -96,7 +113,6 @@ const Home = (props: Props) => {
           <ViewAllBtn href="/videos" />
 
         </div>
-
       </div>
       <div>
       </div>
