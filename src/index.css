@@ -1,7 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
-@import url('https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap');
-@custom-variant dark (&:is(.dark *));
+/* Removed @custom-variant as it is not a standard CSS rule */
 body{
   background: #242424;
 }

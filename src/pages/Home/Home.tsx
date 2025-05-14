@@ -11,10 +11,9 @@ import artist3 from '@/assets/artist/artist3.jpg'
 import artist4 from '@/assets/artist/artist4.jpg'
 import artist5 from '@/assets/artist/artist5.jpg'
 import VidoCard from '@/components/CustomUi/VidoCard'
-import { View } from 'lucide-react'
 import ViewAllBtn from '@/components/CustomUi/ViewAllBtn'
 import Footer from '@/components/Footer/Footer'
-type Props = {}
+import { TrendingMusic } from '@/components/CustomUi/TerndingMusic'
 const artistData = [
   { image: artist1, name: 'Artist 1', viewCount: '1M' },
   { image: artist2, name: 'Artist 2', viewCount: '2M' },
@@ -22,7 +21,7 @@ const artistData = [
   { image: artist4, name: 'Artist 4', viewCount: '4M' },
   { image: artist5, name: 'Artist 5', viewCount: '5M' },
 ]
-const Home = (props: Props) => {
+const Home = () => {
   return (
     <Layout>
       {/* Top Navigation Bar */}
@@ -79,24 +78,24 @@ const Home = (props: Props) => {
         <h1 className='text-white text-3xl font-semibold'>New Realse <span className='text-fuchsia-700'>Songs</span></h1>
         <div className='flex justify-between items-center gap-4'>
 
-        <div className='flex gap-3'>
-          {artistData.map((artist, index) => (
-            <MusicCard key={index} imgSrc={artist.image} songName={artist.name} artistName={artist.name} />
-          ))}
-        </div>
-        <ViewAllBtn href="/songs" />
+          <div className='flex gap-3'>
+            {artistData.map((artist, index) => (
+              <MusicCard key={index} imgSrc={artist.image} songName={artist.name} artistName={artist.name} />
+            ))}
+          </div>
+          <ViewAllBtn href="/songs" />
         </div>
       </div>
       <div className='gap-4 flex flex-col'>
         <h1 className='text-white text-3xl font-semibold'>popular <span className='text-fuchsia-700'>Artist</span></h1>
         <div className='flex justify-between items-center gap-4'>
 
-        <div className='flex gap-3'>
-          {artistData.map((artist, index) => (
-            <ArtistCard key={index} image={artist.image} name={artist.name} />
-          ))}
-        </div>
-        <ViewAllBtn href="/artist" />
+          <div className='flex gap-3'>
+            {artistData.map((artist, index) => (
+              <ArtistCard key={index} image={artist.image} name={artist.name} />
+            ))}
+          </div>
+          <ViewAllBtn href="/artist" />
         </div>
       </div>
 
@@ -115,8 +114,9 @@ const Home = (props: Props) => {
 
         </div>
       </div>
-  
-<Footer/>
+      <TrendingMusic />
+
+      <Footer />
     </Layout>
 
   )
