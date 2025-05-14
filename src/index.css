@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-
+@import url('https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap');
 @custom-variant dark (&:is(.dark *));
 body{
   background: #242424;
@@ -156,7 +156,6 @@ a:hover {
     @apply bg-background text-foreground;
   }
 }
-
-.melody{
-  background : 
+.gener {
+  font-family: 'Just Another Hand', cursive;
 }

@@ -13,6 +13,7 @@ import artist5 from '@/assets/artist/artist5.jpg'
 import VidoCard from '@/components/CustomUi/VidoCard'
 import { View } from 'lucide-react'
 import ViewAllBtn from '@/components/CustomUi/ViewAllBtn'
+import Footer from '@/components/Footer/Footer'
 type Props = {}
 const artistData = [
   { image: artist1, name: 'Artist 1', viewCount: '1M' },
@@ -114,8 +115,8 @@ const Home = (props: Props) => {
 
         </div>
       </div>
-      <div>
-      </div>
+  
+<Footer/>
     </Layout>
 
   )
