@@ -3,10 +3,11 @@ import { Button } from '../ui/button'
 import { User } from 'lucide-react'
 import { FcGoogle } from "react-icons/fc";
 import { Mail, Phone } from 'lucide-react' // Add these icons
+import { FaFacebook, FaInstagram, FaPhone, FaPhoneSquare, FaTwitter } from 'react-icons/fa';
 
 type Props = {}
 const data = [
-  
+
   {
     title: 'Melodies',
     subtitles: [
@@ -14,7 +15,10 @@ const data = [
       'New Releases',
       'Genres',
       'Playlists',
-      'Artists'
+      'Artists',
+      'Albums',
+      'Podcasts',
+      
     ]
   },
   {
@@ -103,17 +107,40 @@ const Footer = (props: Props) => {
           </div>
         </div>
       </div>
-      <div>
+      <div className='flex justify-between  mt-10 gap-10'>
         {/* about */}
-        <div></div>
+        <div className=' text-white w-[32%] self-center'>
+          <h2 className='text-2xl font-bold  flex'>About Us</h2>
+         
+          <p>Melodies is a website that has been created for over 5 year’s now and it is one of the most famous music player website’s in the world. in this website you can listen and download songs for free. also of you want no limitation you can buy our premium pass’s.</p>
+        </div>
         {/* melodies */}
-        <div></div>
-        {/* access */}
-        <div></div>
-        {/* contact */}
-        <div></div>
+        
+         {
+          data.map((item, index )=> (
+            <div key={index} className='text-center text-white w-[12%]'>
+              <h2 className=' text-[24px] font-[700] pb-3 border-b-4 border-b-white'>{item.title}</h2>
+              <ul className='flex flex-col gap-3 mt-3'>
+                {item.subtitles.map((subtitle, index) => (
+                  <li key={index} className='text-sm'>{subtitle}</li>
+                ))}
+              </ul>
+            </div>
+          )
+         )}
         {/* social */}
-        <div></div>
+        <div className='self-center text-white w-[20%]'>
+          <h1 className="text-center mb-6 font-bold text-3xl melody bg-clip-text text-transparent" 
+                        style={{
+                            backgroundImage: "linear-gradient(90deg, rgba(190, 13, 141, 1) 39%, rgba(14, 158, 239, 1) 100%)",
+                        }}>Melodies</h1>
+                        <ul className='flex justify-center gap-4 text-2xl'>
+                          <li><FaFacebook/></li>
+                          <li><FaInstagram/></li>
+                          <li><FaTwitter/></li>
+                          <li><FaPhone/></li>
+                        </ul>
+        </div>
       </div>
     </div>
   )
