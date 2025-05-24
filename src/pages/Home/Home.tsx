@@ -12,7 +12,6 @@ import artist4 from '@/assets/artist/artist4.jpg'
 import artist5 from '@/assets/artist/artist5.jpg'
 import VidoCard from '@/components/CustomUi/VidoCard'
 import ViewAllBtn from '@/components/CustomUi/ViewAllBtn'
-import Footer from '@/components/Footer/Footer'
 import { TrendingMusic } from '@/components/CustomUi/TerndingMusic'
 const artistData = [
   { image: artist1, name: 'Artist 1', viewCount: '1M' },
@@ -114,9 +113,8 @@ const Home = () => {
 
         </div>
       </div>
-      <TrendingMusic />
+      <TrendingMusic isHome={true}/>
 
-      <Footer />
     </Layout>
 
   )

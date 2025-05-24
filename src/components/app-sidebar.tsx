@@ -24,8 +24,8 @@ const items = [
         icon: Compass,
     },
     {
-        title: "Alubm",
-        url: "#",
+        title: "Album",
+        url: "/album",
         icon: Disc,
     },
     {

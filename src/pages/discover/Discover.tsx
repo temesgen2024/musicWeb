@@ -119,6 +119,7 @@ const Discover = () => {
           <ViewAllBtn href="/songs" />
         </div>
       </div>
+      
     </Layout>
   )
 }

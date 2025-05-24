@@ -49,10 +49,13 @@ const musicData = [
     },
 ]
 
-export function TrendingMusic() {
+type props = {
+    isHome?: boolean
+}
+export function TrendingMusic({isHome}: props) {
     return (
         <div className="w-full px-4 py-6 rounded-2xl text-white">
-            <h2 className="text-2xl font-semibold mb-4">Trending Music</h2>
+            {isHome && <h1 className="text-3xl font-semibold mb-4">Trending Music</h1>}
             <div className="w-full flex flex-col gap-2">
                 {/* Header Row */}
                 <div className="hidden md:flex px-4 py-2  rounded text-sm font-semibold w-full">
