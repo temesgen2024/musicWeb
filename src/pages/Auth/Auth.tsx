@@ -5,25 +5,81 @@ import { Button } from "@/components/ui/button";
 import Logo from "@/assets/logo.png";
 import { Card } from "@/components/ui/card";
 import { FaGoogle, FaFacebook } from "react-icons/fa"; // Importing icons
-import { LogIn } from "lucide-react";
-
-type Props = {};
-
-const Auth = (props: Props) => {
+import { useGetUserQuery, useSignInMutation, useSignUpMutation } from "@/lib/service/authApi";
+import { toast, ToastContainer } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/lib/slice/authSlice";
+const Auth = () => {
   const [isLogin, setIsLogin] = React.useState(true);
   const handleToggle = () => {
     setIsLogin(!isLogin);
   };
-  return (
+  const [signIn, { isLoading: isSigningIn }] = useSignInMutation();
+  const [signUp, { isLoading: isSigningUp }] = useSignUpMutation();
+  // Remove the incorrect destructuring and use the refetch method from the hook
+  const { refetch: getUser } = useGetUserQuery();
+  const dispatch = useDispatch();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const formData = new FormData(e.target as HTMLFormElement);
+    const email = formData.get("email");
+    const password = formData.get("password");
+
+    if (typeof email !== "string" || typeof password !== "string") {
+      toast.error("Email and password are required.");
+      return;
+    }
+
+    try {
+      if (isLogin) {
+        await signIn({ email, password }).unwrap();
+        const { data: user } = await getUser();
+        if (user) {
+          dispatch(setUser({ user }));
+          toast.success("Login successful");
+        }
+      } else {
+        const name = formData.get("name");
+        if (typeof name !== "string") {
+          toast.error("Name is required for signup.");
+          return;
+        }
+
+        await signUp({ name, email, password }).unwrap();
+        toast.success("Signup successful");
+      }
+    } catch (error: unknown) {
+      let errorMessage = "An error occurred";
+      if (error && typeof error === 'object' && 'data' in error) {
+        const errorData = (error as { data?: { message?: string } }).data;
+        if (errorData?.message) {
+          errorMessage = errorData.message;
+        }
+      }
+      toast.error(errorMessage);
+    }
+  }; return (
     <div className="flex justify-center items-center min-h-screen ">
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       {isLogin ? (
         <Card className="p-6  min-w-md bg-transparent">
           <div className="flex flex-col items-center text-white">
             <img src={Logo} alt="Logo" className="w-20 h-20 mb-4 " />
             <p className="text-base  mb-6 text-start w-full mt-5 ">
               Login To Continu
-            </p>
-            <form className="w-full">
+            </p>            <form className="w-full" onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label
                   className="block text-sm mb-2 text-start"
@@ -31,7 +87,13 @@ const Auth = (props: Props) => {
                 >
                   Email
                 </label>
-                <Input type="email" placeholder="Email" className="w-full" />
+                <Input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  className="w-full"
+                  required
+                />
               </div>
               <div className="mb-4">
                 <label
@@ -42,16 +104,19 @@ const Auth = (props: Props) => {
                 </label>
                 <Input
                   type="password"
+                  name="password"
                   placeholder="Password"
                   className="w-full"
+                  required
                 />
               </div>
               <Button
                 variant={"default"}
                 type="submit"
-                className="w-full bg-fuchsia-500 "
+                className="w-full bg-fuchsia-500"
+                disabled={isSigningIn}
               >
-                Login
+                {isSigningIn ? "Logging in..." : "Login"}
               </Button>
             </form>
             <div className="flex items-center justify-center mt-6"></div>
@@ -91,13 +156,18 @@ const Auth = (props: Props) => {
             <img src={Logo} alt="Logo" className="w-20 h-20 mb-4 " />
             <p className="text-base  mb-6 text-start w-full mt-5 ">
               Signup To Continu
-            </p>
-            <form className="w-full">
+            </p>            <form className="w-full" onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label className="block text-sm mb-2 text-start" htmlFor="name">
                   Name
                 </label>
-                <Input type="name" placeholder="Name" className="w-full" />
+                <Input
+                  type="text"
+                  name="name"
+                  placeholder="Name"
+                  className="w-full"
+                  required
+                />
               </div>
               <div className="mb-4">
                 <label
@@ -106,7 +176,13 @@ const Auth = (props: Props) => {
                 >
                   Email
                 </label>
-                <Input type="email" placeholder="Email" className="w-full" />
+                <Input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  className="w-full"
+                  required
+                />
               </div>
               <div className="mb-4">
                 <label
@@ -117,16 +193,19 @@ const Auth = (props: Props) => {
                 </label>
                 <Input
                   type="password"
+                  name="password"
                   placeholder="Password"
                   className="w-full"
+                  required
                 />
               </div>
               <Button
                 variant={"default"}
                 type="submit"
-                className="w-full bg-fuchsia-500 "
+                className="w-full bg-fuchsia-500"
+                disabled={isSigningUp}
               >
-                Login
+                {isSigningUp ? "Signing up..." : "Sign Up"}
               </Button>
             </form>
             <div className="flex items-center justify-center mt-6"></div>
@@ -162,3 +241,5 @@ const Auth = (props: Props) => {
 };
 
 export default Auth;
+
+
