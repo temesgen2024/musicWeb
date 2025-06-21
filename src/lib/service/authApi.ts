@@ -92,7 +92,7 @@ export const authApi = createApi({
   tagTypes: ["User"],
   endpoints: (builder) => ({
     getUser: builder.query<User, void>({
-      query: () => "/user/me",
+      query: () => "/users/me",
       providesTags: ["User"],
     }),
     signUp: builder.mutation<{ status: string; message?: string }, SignUpData>({

@@ -9,6 +9,8 @@ import { useGetUserQuery, useSignInMutation, useSignUpMutation } from "@/lib/ser
 import { toast, ToastContainer } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { setUser } from "@/lib/slice/authSlice";
+
+
 const Auth = () => {
   const [isLogin, setIsLogin] = React.useState(true);
   const handleToggle = () => {
@@ -48,6 +50,7 @@ const Auth = () => {
 
         await signUp({ name, email, password }).unwrap();
         toast.success("Signup successful");
+
       }
     } catch (error: unknown) {
       let errorMessage = "An error occurred";
