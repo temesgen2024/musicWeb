@@ -9,7 +9,7 @@ import { useGetUserQuery, useSignInMutation, useSignUpMutation } from "@/lib/ser
 import { toast, ToastContainer } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { setUser } from "@/lib/slice/authSlice";
-
+import { useNavigate } from "react-router-dom";
 
 const Auth = () => {
   const [isLogin, setIsLogin] = React.useState(true);
@@ -21,6 +21,7 @@ const Auth = () => {
   // Remove the incorrect destructuring and use the refetch method from the hook
   const { refetch: getUser } = useGetUserQuery();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,6 +41,7 @@ const Auth = () => {
         if (user) {
           dispatch(setUser({ user }));
           toast.success("Login successful");
+          navigate("/");
         }
       } else {
         const name = formData.get("name");
@@ -48,8 +50,11 @@ const Auth = () => {
           return;
         }
 
-        await signUp({ name, email, password }).unwrap();
+        const response = await signUp({ name, email, password }).unwrap();
         toast.success("Signup successful");
+        console.log(response);
+        navigate("/auth?mode=signin");
+        
 
       }
     } catch (error: unknown) {
